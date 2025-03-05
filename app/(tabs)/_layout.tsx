@@ -1,7 +1,7 @@
 import React              from 'react';
-import { Tabs }           from 'expo-router';
-import { TabBarIcon }     from '@/components/navigation/TabBarIcon';
 import { Colors }         from '@/constants/Colors';
+import { TabBarIcon }     from '@/components/navigation/TabBarIcon';
+import { Tabs }           from 'expo-router';
 import { useColorScheme } from '@/hooks/useColorScheme';
 
 export default function TabLayout() {

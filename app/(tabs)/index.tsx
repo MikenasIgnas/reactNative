@@ -1,30 +1,51 @@
-import { View, Text, StyleSheet, ImageBackground, Pressable } from 'react-native'
-import React from 'react'
-import { Link } from 'expo-router'
+import { 
+  View, 
+  Text, 
+  StyleSheet, 
+  ImageBackground, 
+  Pressable 
+}                     from 'react-native';
+import React          from 'react';
+import coffeShopImage from "@/assets/images/download.png";
 
-import coffeShopImage from "@/assets/images/download.png"
+const fetchUserData = async () => {
+  try {
+    const response = await fetch('http://localhost:3000/users', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    console.log("Fetched Users:", data);
+  } catch (error ) {
+    console.error("Error fetching data:", error);
+  }
+};
 
 const App = () => {
-
   return (
     <View style={styles.container}>
       <ImageBackground 
         source={coffeShopImage} 
         style={styles.image} 
         resizeMode='cover'
-        >
+      >
         <Text style={styles.title}>CoffeeShop</Text>
-        <Link href="/contact" style={{marginHorizontal: "auto"}} asChild>
-        <Pressable style={styles.button}>
-         <Text style={styles.buttonText}>Contact</Text>
+        <Pressable onPress={fetchUserData} style={styles.button}>
+          <Text style={styles.buttonText}>Contact</Text>
         </Pressable>
-        </Link>
       </ImageBackground>
     </View>
-  )
-}
+  );
+};
 
-export default App
+export default App;
 
 const styles = StyleSheet.create({
   container: {
@@ -69,4 +90,4 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(0,0,0,0.5)',
     padding: 4,
   }
-})
+});
